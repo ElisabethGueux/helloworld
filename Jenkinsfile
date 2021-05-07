@@ -2,8 +2,6 @@ pipeline {
      environment {
        IMAGE_NAME = "helloworld"
        IMAGE_TAG = "latest"
-       #STAGING = "elisabeth-staging"
-       #PRODUCTION = "elisabeth-production"
        IMAGE_REPO = "elisabethgueux" #celui de dockerhub
      }
      agent none
@@ -21,7 +19,7 @@ pipeline {
             steps {
                script {
                  sh '''
-                    docker run --name $IMAGE_NAME -d -p 80:5000 -e PORT=5000 $IMAGE_REPO/$IMAGE_NAME:$IMAGE_TAG
+                    docker run --name $IMAGE_NAME -d -p 80:80 -e PORT=80 $IMAGE_REPO/$IMAGE_NAME:$IMAGE_TAG
                     sleep 5
                  '''
                }
@@ -32,7 +30,7 @@ pipeline {
            steps {
               script {
                 sh '''
-                    curl http://172.17.0.1 | grep -q "Hello world"
+                    curl http://172.17.0.1 | grep -q "Hello universe"
                 '''
               }
            }
