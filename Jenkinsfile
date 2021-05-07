@@ -1,8 +1,9 @@
+
 pipeline {
      environment {
        IMAGE_NAME = "helloworld"
        IMAGE_TAG = "latest"
-       IMAGE_REPO = "elisabethgueux"
+       IMAGE_REPO = "elisabethgueux
      }
      agent none
      stages {
@@ -62,7 +63,7 @@ pipeline {
            }
         }
      stage('deploy with ansible') {
-            agent { docker { image 'elisabethgueux/helloworld:latest' } }
+            agent { docker { image 'dirane/docker-ansible:latest' } }
             steps {
                 script {
                     sh '''
@@ -73,7 +74,7 @@ pipeline {
             }
         }
         stage('test application') {
-            agent { docker { image 'elisabethgueux/helloworld:latest' } }
+            agent { docker { image 'dirane/docker-ansible:latest' } }
             steps {
                 script {
                     sh '''
@@ -83,5 +84,8 @@ pipeline {
                 }
             }
         }
+
   }
 }
+
+
