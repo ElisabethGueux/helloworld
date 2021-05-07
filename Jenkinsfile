@@ -2,7 +2,7 @@ pipeline {
      environment {
        IMAGE_NAME = "helloworld"
        IMAGE_TAG = "latest"
-       IMAGE_REPO = "elisabethgueux"
+       IMAGE_REPO = "elisabethgueux
      }
      agent none
      stages {
@@ -45,5 +45,21 @@ pipeline {
              }
           }
      }
+     stage('Push image on dockerhub') {
+           agent any 
+           environment {
+                DOCKERHUB_LOGIN = credentials('dockerhub_elisabeth')
+                
+            }
+
+           steps {
+               script {
+                   sh '''
+		   docker login --username ${DOCKERHUB_LOGIN_USR} --password ${DOCKERHUB_LOGIN_PSW}
+                   docker push ${IMAGE_REPO}/${IMAGE_NAME}:${IMAGE_TAG}
+                   '''
+               }
+           }
+        }
   }
 }
