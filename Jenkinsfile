@@ -3,7 +3,7 @@ pipeline {
      environment {
        IMAGE_NAME = "helloworld"
        IMAGE_TAG = "latest"
-       IMAGE_REPO = "elisabethgueux
+       IMAGE_REPO = "elisabethgueux"
      }
      agent none
      stages {
